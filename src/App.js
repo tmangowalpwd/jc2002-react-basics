@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import "./assets/styles.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import BandSection from "./components/BandSection/BandSection";
@@ -6,6 +7,7 @@ import TourSection from "./components/TourSection/TourSection";
 import ClassComponent from "./components/ClassComponent/ClassComponent";
 import ContentCard from "./components/ContentCard/ContentCard";
 import TodoItem from "./components/TodoItem/TodoItem";
+import { Button } from 'reactstrap';
 
 const data = [
   {
@@ -29,6 +31,35 @@ const data = [
 ]
 
 function App() {
+  const [myUsername, setMyUsername] = useState("seto");
+  const [fullName, setFullName] = useState("")
+  const [todoList, setTodoList] = useState([
+    {
+      date: "12 Feb 2022",
+      action: "Belajar Fundamental",
+      isDone: true
+    },
+    {
+      date: "14 Feb 2022",
+      action: "Beli coklat buat ayang",
+      isDone: true
+    },
+    {
+      date: "28 Feb 2022",
+      action: "Cicil project frontend",
+      isDone: false
+    },
+    {
+      date: "1 Mar 2022",
+      action: "Design project",
+      isDone: false
+    },
+    {
+      date: "2 Mar 2022",
+      action: "Bikin component library",
+      isDone: true
+    },
+  ])
 
   const renderContentList = () => {
     const jsxResult = data.map((val) => {
@@ -44,16 +75,38 @@ function App() {
 
     return jsxResult
   }
+
+  const renderTodoList = () => {
+    return todoList.map((val) => {
+      return (
+        <TodoItem
+          date={val.date}
+          action={val.action}
+          isDone={val.isDone}
+        />
+      )
+    })
+  }
+
+  const changeUsername = () => {
+    setMyUsername("mark")
+    setFullName("jane bar")
+  }
+
   return (
     <>
       {/* <Navbar /> */}
       <div className="container">
         <div className="row">
+          <Button onClick={() => setTodoList([])}>Clear Todo List</Button>
           <div className="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
             {/* {renderContentList()} */}
-            <TodoItem />
+            {renderTodoList()}
           </div>
         </div>
+        <h1>{myUsername}</h1>
+        <h1>{fullName}</h1>
+        <Button onClick={changeUsername}>Change username</Button>
       </div>
       {/* <BandSection />
       <TourSection />
