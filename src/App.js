@@ -102,6 +102,18 @@ function App() {
     setTodoInputValue(value)
   }
 
+  const addTodoItem = () => {
+    const newTodoArray = [...todoList]
+
+    newTodoArray.push({
+      date: "2 Mar 2022",
+      action: todoInputValue,
+      isDone: false
+    })
+
+    setTodoList(newTodoArray)
+  }
+
   return (
     <>
       {/* <Navbar /> */}
@@ -111,7 +123,7 @@ function App() {
             <Input onChange={inputHandler} />
           </div>
           <div className='col-2'>
-            <Button color='success'>Add Todo</Button>
+            <Button onClick={addTodoItem} color='success'>Add Todo</Button>
           </div>
         </div>
         <div className="row">
