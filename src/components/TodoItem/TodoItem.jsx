@@ -26,15 +26,20 @@ const TodoItem = (props) => {
             </CardTitle>
             <CardText>{props.action}</CardText>
           </div>
-          {isDone ? (
-            <Button onClick={toggleDone} color="success">
-              Done
+          <div className="d-flex align-items-center">
+            {isDone ? (
+              <Button className="mx-2" onClick={toggleDone} color="success">
+                Done
+              </Button>
+            ) : (
+              <Button className="mx-2" onClick={toggleDone} color="warning">
+                On Going
+              </Button>
+            )}
+            <Button onClick={props.deleteItem} className="mx-2" color="danger">
+              Delete
             </Button>
-          ) : (
-            <Button onClick={toggleDone} color="danger">
-              On Going
-            </Button>
-          )}
+          </div>
         </div>
       </CardBody>
     </Card>

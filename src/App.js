@@ -77,12 +77,13 @@ function App() {
   }
 
   const renderTodoList = () => {
-    return todoList.map((val) => {
+    return todoList.map((val, idx) => {
       return (
         <TodoItem
           date={val.date}
           action={val.action}
           isDone={val.isDone}
+          deleteItem={() => deleteTodoItem(idx)}
         />
       )
     })
@@ -119,6 +120,14 @@ function App() {
     })
 
     setTodoList(newTodoArray)
+  }
+
+  const deleteTodoItem = (index) => {
+    const deleteTodoArray = [...todoList]
+
+    deleteTodoArray.splice(index, 1)
+
+    setTodoList(deleteTodoArray)
   }
 
   return (
