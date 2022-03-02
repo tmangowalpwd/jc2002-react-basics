@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 
 const TodoItem = (props) => {
+  const [isDone, setIsDone] = useState(props.isDone);
   // const renderButton = () => {
   //   if (props.status === "done") {
   //     return <Button color="success">Done</Button>;
@@ -8,6 +10,11 @@ const TodoItem = (props) => {
 
   //   return <Button color="danger">On Going</Button>;
   // };
+
+  const toggleDone = () => {
+    setIsDone(!isDone);
+  };
+
   return (
     <Card className="my-2">
       <CardBody>
@@ -19,10 +26,14 @@ const TodoItem = (props) => {
             <CardText>{props.action}</CardText>
           </div>
           {/* {renderButton()} */}
-          {props.isDone ? (
-            <Button color="success">Done</Button>
+          {isDone ? (
+            <Button onClick={toggleDone} color="success">
+              Done
+            </Button>
           ) : (
-            <Button color="danger">On Going</Button>
+            <Button onClick={toggleDone} color="danger">
+              On Going
+            </Button>
           )}
         </div>
       </CardBody>

@@ -7,7 +7,7 @@ import TourSection from "./components/TourSection/TourSection";
 import ClassComponent from "./components/ClassComponent/ClassComponent";
 import ContentCard from "./components/ContentCard/ContentCard";
 import TodoItem from "./components/TodoItem/TodoItem";
-import { Button } from 'reactstrap';
+import { Button, Input } from 'reactstrap';
 
 const data = [
   {
@@ -93,12 +93,28 @@ function App() {
     setFullName("jane bar")
   }
 
+  const [todoInputValue, setTodoInputValue] = useState("")
+
+  const inputHandler = (event) => {
+    const { value } = event.target;
+
+    // console.log(value)
+    setTodoInputValue(value)
+  }
+
   return (
     <>
       {/* <Navbar /> */}
       <div className="container">
+        <div className='row my-3'>
+          <div className='offset-3 col-5'>
+            <Input onChange={inputHandler} />
+          </div>
+          <div className='col-2'>
+            <Button color='success'>Add Todo</Button>
+          </div>
+        </div>
         <div className="row">
-          <Button onClick={() => setTodoList([])}>Clear Todo List</Button>
           <div className="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
             {/* {renderContentList()} */}
             {renderTodoList()}
