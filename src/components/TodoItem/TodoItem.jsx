@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
+import moment from "moment";
 
 const TodoItem = (props) => {
   const [isDone, setIsDone] = useState(props.isDone);
@@ -21,11 +22,10 @@ const TodoItem = (props) => {
         <div className="d-flex justify-content-between">
           <div>
             <CardTitle tag="h5" className="fw-bold">
-              {props.date}
+              {moment(props.date).format("DD MMMM YYYY")}
             </CardTitle>
             <CardText>{props.action}</CardText>
           </div>
-          {/* {renderButton()} */}
           {isDone ? (
             <Button onClick={toggleDone} color="success">
               Done
