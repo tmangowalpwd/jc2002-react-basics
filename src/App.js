@@ -84,6 +84,7 @@ function App() {
           action={val.action}
           isDone={val.isDone}
           deleteItem={() => deleteTodoItem(idx)}
+          toggleStatus={() => toggleTodoStatus(idx)}
         />
       )
     })
@@ -128,6 +129,14 @@ function App() {
     deleteTodoArray.splice(index, 1)
 
     setTodoList(deleteTodoArray)
+  }
+
+  const toggleTodoStatus = (index) => {
+    const duplicateTodoArray = [...todoList]
+
+    duplicateTodoArray[index].isDone = !duplicateTodoArray[index].isDone
+
+    setTodoList(duplicateTodoArray)
   }
 
   return (

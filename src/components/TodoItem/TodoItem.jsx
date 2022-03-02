@@ -3,7 +3,6 @@ import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 import moment from "moment";
 
 const TodoItem = (props) => {
-  const [isDone, setIsDone] = useState(props.isDone);
   // const renderButton = () => {
   //   if (props.status === "done") {
   //     return <Button color="success">Done</Button>;
@@ -11,10 +10,6 @@ const TodoItem = (props) => {
 
   //   return <Button color="danger">On Going</Button>;
   // };
-
-  const toggleDone = () => {
-    setIsDone(!isDone);
-  };
 
   return (
     <Card className="my-2">
@@ -27,12 +22,20 @@ const TodoItem = (props) => {
             <CardText>{props.action}</CardText>
           </div>
           <div className="d-flex align-items-center">
-            {isDone ? (
-              <Button className="mx-2" onClick={toggleDone} color="success">
+            {props.isDone ? (
+              <Button
+                className="mx-2"
+                onClick={props.toggleStatus}
+                color="success"
+              >
                 Done
               </Button>
             ) : (
-              <Button className="mx-2" onClick={toggleDone} color="warning">
+              <Button
+                className="mx-2"
+                onClick={props.toggleStatus}
+                color="warning"
+              >
                 On Going
               </Button>
             )}
