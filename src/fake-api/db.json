@@ -1,0 +1,22 @@
+{
+  "todos": [
+    {
+      "date": "2022-03-31",
+      "action": "todo baru",
+      "isDone": false,
+      "id": 5
+    },
+    {
+      "date": "2022-03-23",
+      "action": "code",
+      "isDone": false,
+      "id": 7
+    },
+    {
+      "date": "2022-03-26",
+      "action": "eat",
+      "isDone": true,
+      "id": 8
+    }
+  ]
+}
