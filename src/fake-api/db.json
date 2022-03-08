@@ -12,5 +12,14 @@
       "isDone": false,
       "id": 7
     }
+  ],
+  "band_members": [
+    {
+      "id": 1,
+      "full_name": "Seto",
+      "instrument": "Guitar",
+      "date_of_birth": "24 Januari 1995",
+      "hobby": "Fishing"
+    }
   ]
 }

@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 import TourPage from "./pages/tour";
 import HomePage from "./pages/home";
 import NotFoundPage from "./pages/404";
+import BandMemberPage from "./pages/band-member";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/band" element={<BandPage />} />
         <Route path="/todo" element={<TodoPage />} />
         <Route path="/tour" element={<TourPage />} />
+        <Route path="/band-member/:namaMemberBand" element={<BandMemberPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
