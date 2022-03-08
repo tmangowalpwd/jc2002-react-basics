@@ -11,12 +11,6 @@
       "action": "code",
       "isDone": false,
       "id": 7
-    },
-    {
-      "date": "2022-03-26",
-      "action": "eat",
-      "isDone": true,
-      "id": 8
     }
   ]
 }
