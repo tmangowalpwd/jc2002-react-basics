@@ -1,6 +1,40 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import BandMemberCard from "../BandMemberCard/BandMemberCard";
 
 const BandSection = () => {
+  const [bandMembers, setBandMembers] = useState([]);
+
+  const fetchBandMembers = () => {
+    axios
+      .get(`http://localhost:2000/band_members`)
+      .then((res) => {
+        setBandMembers(res.data);
+      })
+      .catch((err) => {
+        alert("Terjadi kesalahan di server");
+        console.log(err);
+      });
+  };
+
+  const renderBandMembers = () => {
+    return bandMembers.map((val) => {
+      return (
+        <Link
+          to={`/band-member/${val.id}`}
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <BandMemberCard fullName={val.full_name} />
+        </Link>
+      );
+    });
+  };
+
+  useEffect(() => {
+    fetchBandMembers();
+  }, []);
+
   return (
     <section id="band" className="container py-5">
       <div className="band-info">
@@ -18,11 +52,7 @@ const BandSection = () => {
           perspiciatis sit molestias veniam at eos!
         </p>
       </div>
-      <div className="band-photos">
-        <BandMemberCard />
-        <BandMemberCard />
-        <BandMemberCard />
-      </div>
+      <div className="band-photos">{renderBandMembers()}</div>
     </section>
   );
 };

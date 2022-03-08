@@ -18,7 +18,7 @@ function App() {
         <Route path="/band" element={<BandPage />} />
         <Route path="/todo" element={<TodoPage />} />
         <Route path="/tour" element={<TourPage />} />
-        <Route path="/band-member/:namaMemberBand" element={<BandMemberPage />} />
+        <Route path="/band-member/:bandMemberId" element={<BandMemberPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
