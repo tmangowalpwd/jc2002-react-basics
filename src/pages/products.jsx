@@ -33,11 +33,15 @@ const ProductCard = ({ productName, price, category }) => {
 const ProductPage = () => {
   const [productList, setProductList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [searchValue, setSearchValue] = useState("");
-
-  const [currentPage, setCurrentPage] = useState(1);
 
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const [searchValue, setSearchValue] = useState(
+    searchParams.get("search") ? searchParams.get("search") : ""
+  );
+  const [currentPage, setCurrentPage] = useState(
+    searchParams.get("page") ? parseInt(searchParams.get("page")) : 1
+  );
 
   const pageLimit = 3;
 
@@ -78,10 +82,15 @@ const ProductPage = () => {
   };
 
   const searchButtonHandler = () => {
-    setSearchValue(searchInput);
-    setCurrentPage(1);
+    if (searchInput) {
+      setSearchValue(searchInput);
+      setCurrentPage(1);
 
-    setSearchParams({ search: searchInput });
+      setSearchParams({ search: searchInput, page: 1 });
+    } else {
+      setSearchValue("");
+      setSearchParams({ page: 1 });
+    }
   };
 
   const paginationHandler = (direction = "next") => {
@@ -97,16 +106,22 @@ const ProductPage = () => {
       newPage -= 1;
     }
 
+    if (searchValue) {
+      setSearchParams({ page: newPage, search: searchValue });
+    } else {
+      setSearchParams({ page: newPage });
+    }
     setCurrentPage(newPage);
   };
 
   useEffect(() => {
     let product_name = searchParams.get("search");
+    let _page = searchParams.get("page");
 
     fetchProducts({
       params: {
         _limit: pageLimit,
-        _page: currentPage,
+        _page: _page,
         product_name: product_name,
       },
     });
