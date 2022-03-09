@@ -8,6 +8,7 @@ import TourPage from "./pages/tour";
 import HomePage from "./pages/home";
 import NotFoundPage from "./pages/404";
 import HalamanBandMember from "./pages/band-member";
+import ProductPage from "./pages/products";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/todo" element={<TodoPage />} />
         <Route path="/tour" element={<TourPage />} />
         <Route path="/band-member/:bandMemberId" element={<HalamanBandMember />} />
+        <Route path="/products" element={<ProductPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
