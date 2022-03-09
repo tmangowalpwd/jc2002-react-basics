@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../configs/api";
+import { useSearchParams } from "react-router-dom";
 
 const ProductCard = ({ productName, price, category }) => {
   return (
@@ -35,6 +36,8 @@ const ProductPage = () => {
   const [searchValue, setSearchValue] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const pageLimit = 3;
 
@@ -77,15 +80,8 @@ const ProductPage = () => {
   const searchButtonHandler = () => {
     setSearchValue(searchInput);
     setCurrentPage(1);
-    if (searchInput) {
-      fetchProducts({
-        params: {
-          product_name: searchInput,
-        },
-      });
-    } else {
-      fetchProducts();
-    }
+
+    setSearchParams({ search: searchInput });
   };
 
   const paginationHandler = (direction = "next") => {
@@ -102,19 +98,19 @@ const ProductPage = () => {
     }
 
     setCurrentPage(newPage);
+  };
+
+  useEffect(() => {
+    let product_name = searchParams.get("search");
 
     fetchProducts({
       params: {
         _limit: pageLimit,
-        _page: newPage,
-        product_name: searchValue ? searchValue : undefined,
+        _page: currentPage,
+        product_name: product_name,
       },
     });
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  }, [currentPage, searchValue]);
 
   return (
     <Center>
