@@ -33,17 +33,15 @@ const ProductPage = () => {
   const [productList, setProductList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
-  const [searchValue, setSearchValue] = useState("");
-
   const inputHandler = (event) => {
     const { value } = event.target;
 
     setSearchInput(value);
   };
 
-  const fetchProducts = () => {
+  const fetchProducts = (queryParams = {}) => {
     axiosInstance
-      .get("/products")
+      .get("/products", queryParams)
       .then((res) => {
         setProductList(res.data);
       })
@@ -55,20 +53,26 @@ const ProductPage = () => {
 
   const renderProducts = () => {
     return productList.map((val) => {
-      if (val.product_name.toLowerCase().includes(searchValue.toLowerCase())) {
-        return (
-          <ProductCard
-            category={val.category}
-            price={val.price}
-            productName={val.product_name}
-          />
-        );
-      }
+      return (
+        <ProductCard
+          category={val.category}
+          price={val.price}
+          productName={val.product_name}
+        />
+      );
     });
   };
 
   const searchButtonHandler = () => {
-    setSearchValue(searchInput);
+    if (searchInput) {
+      fetchProducts({
+        params: {
+          product_name: searchInput,
+        },
+      });
+    } else {
+      fetchProducts();
+    }
   };
 
   useEffect(() => {
