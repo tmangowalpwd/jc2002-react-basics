@@ -32,6 +32,11 @@ const ProductCard = ({ productName, price, category }) => {
 const ProductPage = () => {
   const [productList, setProductList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const pageLimit = 3;
 
   const inputHandler = (event) => {
     const { value } = event.target;
@@ -39,7 +44,13 @@ const ProductPage = () => {
     setSearchInput(value);
   };
 
-  const fetchProducts = (queryParams = {}) => {
+  const fetchProducts = (
+    queryParams = {
+      params: {
+        _limit: pageLimit,
+      },
+    }
+  ) => {
     axiosInstance
       .get("/products", queryParams)
       .then((res) => {
@@ -64,6 +75,7 @@ const ProductPage = () => {
   };
 
   const searchButtonHandler = () => {
+    setSearchValue(searchInput);
     if (searchInput) {
       fetchProducts({
         params: {
@@ -73,6 +85,30 @@ const ProductPage = () => {
     } else {
       fetchProducts();
     }
+  };
+
+  const paginationHandler = (direction = "next") => {
+    let newPage = currentPage;
+
+    if (direction === "prev" && currentPage === 1) {
+      return;
+    }
+
+    if (direction === "next") {
+      newPage += 1;
+    } else if (direction === "prev") {
+      newPage -= 1;
+    }
+
+    setCurrentPage(newPage);
+
+    fetchProducts({
+      params: {
+        _limit: pageLimit,
+        _page: newPage,
+        product_name: searchValue ? searchValue : undefined,
+      },
+    });
   };
 
   useEffect(() => {
@@ -92,8 +128,17 @@ const ProductPage = () => {
           Search
         </Button>
 
-        <Flex wrap="wrap" marginTop="4">
+        <Flex wrap="wrap" marginTop="4" justifyContent="center">
           {renderProducts()}
+        </Flex>
+
+        <Flex justifyContent="center">
+          <Button onClick={() => paginationHandler("prev")} marginX="2">
+            Previous Page
+          </Button>
+          <Button onClick={() => paginationHandler("next")} marginX="2">
+            Next Page
+          </Button>
         </Flex>
       </Box>
     </Center>
