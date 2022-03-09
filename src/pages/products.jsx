@@ -82,15 +82,10 @@ const ProductPage = () => {
   };
 
   const searchButtonHandler = () => {
-    if (searchInput) {
-      setSearchValue(searchInput);
-      setCurrentPage(1);
+    setSearchValue(searchInput);
+    setCurrentPage(1);
 
-      setSearchParams({ search: searchInput, page: 1 });
-    } else {
-      setSearchValue("");
-      setSearchParams({ page: 1 });
-    }
+    setSearchParams({ search: searchInput, page: 1 });
   };
 
   const paginationHandler = (direction = "next") => {
@@ -106,11 +101,7 @@ const ProductPage = () => {
       newPage -= 1;
     }
 
-    if (searchValue) {
-      setSearchParams({ page: newPage, search: searchValue });
-    } else {
-      setSearchParams({ page: newPage });
-    }
+    setSearchParams({ page: newPage, search: searchValue });
     setCurrentPage(newPage);
   };
 
@@ -122,10 +113,10 @@ const ProductPage = () => {
       params: {
         _limit: pageLimit,
         _page: _page,
-        product_name: product_name,
+        product_name: product_name ? product_name : undefined,
       },
     });
-  }, [currentPage, searchValue]);
+  }, [currentPage, searchInput]);
 
   return (
     <Center>
