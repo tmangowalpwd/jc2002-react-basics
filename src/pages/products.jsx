@@ -76,6 +76,7 @@ const ProductPage = () => {
 
   const searchButtonHandler = () => {
     setSearchValue(searchInput);
+    setCurrentPage(1);
     if (searchInput) {
       fetchProducts({
         params: {
@@ -136,6 +137,7 @@ const ProductPage = () => {
           <Button onClick={() => paginationHandler("prev")} marginX="2">
             Previous Page
           </Button>
+          <Text fontSize="2xl">{currentPage}</Text>
           <Button onClick={() => paginationHandler("next")} marginX="2">
             Next Page
           </Button>
