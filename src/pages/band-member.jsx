@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 // 1. Dapetin params yang berisi band member ID v
@@ -11,6 +11,8 @@ const BandMemberPage = () => {
   const { bandMemberId } = useParams();
 
   const [bandMemberData, setBandMemberData] = useState({});
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const fetchBandMemberData = () => {
     axios
@@ -30,6 +32,11 @@ const BandMemberPage = () => {
 
   return (
     <div>
+      <button
+        onClick={() => setSearchParams({ test: "testing123", name: "seto" })}
+      >
+        Set search
+      </button>
       <h1>{bandMemberData.full_name}</h1>
       <ul>
         <li>Instrument: {bandMemberData.instrument}</li>
