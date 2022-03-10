@@ -9,6 +9,8 @@ import HomePage from "./pages/home";
 import NotFoundPage from "./pages/404";
 import HalamanBandMember from "./pages/band-member";
 import ProductPage from "./pages/products";
+import UsersPage from "./pages/users";
+import LoginPage from "./pages/login";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/tour" element={<TourPage />} />
         <Route path="/band-member/:bandMemberId" element={<HalamanBandMember />} />
         <Route path="/products" element={<ProductPage />} />
+        <Route path="/users" element={<UsersPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
