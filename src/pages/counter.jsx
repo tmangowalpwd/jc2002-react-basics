@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import counter_types from "../redux/reducers/counter/types";
@@ -20,7 +20,7 @@ const CounterPage = () => {
     }
   };
   return (
-    <Center>
+    <Box maxWidth="2xl" padding="16">
       <Flex alignItems="center" marginTop="10">
         <Button onClick={() => changeCountValue("decrement")} marginRight="4">
           -
@@ -30,7 +30,12 @@ const CounterPage = () => {
           +
         </Button>
       </Flex>
-    </Center>
+      <Flex alignItems="center" marginTop="4">
+        <Input />
+        <Button marginLeft="4">Set Counter</Button>
+      </Flex>
+      <Button marginTop="4">Reset Counter</Button>
+    </Box>
   );
 };
 
