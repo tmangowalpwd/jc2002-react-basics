@@ -28,11 +28,20 @@ const Navbar = () => {
         <Link to="/users">Users</Link>
         <a href="contact.html">Contact</a>
       </div>
-      {userSelector.role}
+      {userSelector.id
+        ? `Hello ${userSelector.username} (${userSelector.id})`
+        : null}
       {/* <i className="bi bi-search" /> */}
-      <Button onClick={logoutBtnHandler} colorScheme="red">
-        Logout
-      </Button>
+
+      {userSelector.id ? (
+        <Button onClick={logoutBtnHandler} colorScheme="red">
+          Logout
+        </Button>
+      ) : (
+        <Link to="/login">
+          <Button>Login</Button>
+        </Link>
+      )}
     </nav>
   );
 };

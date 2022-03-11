@@ -16,6 +16,8 @@ import LoginPage from "./pages/login";
 import CounterPage from "./pages/counter";
 import user_types from "./redux/reducers/types/user"
 import ProtectedPage from "./components/ProtectedPage"
+import ProfilePage from "./pages/profile"
+import MyProfilePage from "./pages/my-profile"
 
 function App() {
   const [isAuthChecked, setIsAuthChecked] = useState(false);
@@ -52,7 +54,7 @@ function App() {
         <Route path="/tour" element={<TourPage />} />
         <Route path="/band-member/:bandMemberId" element={<HalamanBandMember />} />
         <Route path="/products" element={
-          <ProtectedPage needsLogin>
+          <ProtectedPage allowedRoles={["admin"]} >
             <ProductPage />
           </ProtectedPage>
         } />
@@ -63,6 +65,8 @@ function App() {
           </ProtectedPage>
         } />
         <Route path="/counter" element={<CounterPage />} />
+        <Route path="/profile/:userId" element={<ProfilePage />} />
+        <Route path="/my-profile" element={<MyProfilePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

@@ -5,6 +5,7 @@ const ProtectedPage = ({
   children,
   needsLogin = false,
   guestsOnly = false,
+  allowedRoles = [],
 }) => {
   const userSelector = useSelector((state) => state.auth);
 
@@ -21,6 +22,10 @@ const ProtectedPage = ({
   // jika guestsOnly = true, berarti hanya user
   // yang belum login bisa akses halaman ini
   if (guestsOnly && userSelector.id) {
+    return <Navigate to="/" />;
+  }
+
+  if (allowedRoles.length && !allowedRoles.includes(userSelector.role)) {
     return <Navigate to="/" />;
   }
 
