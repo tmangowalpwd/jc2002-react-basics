@@ -18,6 +18,8 @@ const userReducer = (state = initial_state, action) => {
       role: action.payload.role,
       id: action.payload.id
     }
+  } else if (action.type === user_types.LOGOUT_USER) {
+    return initial_state
   }
 
   return state

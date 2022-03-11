@@ -1,6 +1,8 @@
 import "./assets/styles.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import TodoPage from './pages/todo';
 import BandPage from "./pages/band";
 import Navbar from "./components/Navbar/Navbar";
@@ -12,8 +14,33 @@ import ProductPage from "./pages/products";
 import UsersPage from "./pages/users";
 import LoginPage from "./pages/login";
 import CounterPage from "./pages/counter";
+import user_types from "./redux/reducers/types/user"
 
 function App() {
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    // user udah pernah login atau belom?
+    const savedUserData = localStorage.getItem("user_data")
+
+    if (savedUserData) {
+      const parsedUserData = JSON.parse(savedUserData)
+
+      dispatch({
+        type: user_types.LOGIN_USER,
+        payload: parsedUserData
+      })
+    }
+
+    setIsAuthChecked(true);
+  }, [])
+
+  if (!isAuthChecked) {
+    return <div>Loading ...</div>
+  }
+
   return (
     <BrowserRouter>
       <Navbar />

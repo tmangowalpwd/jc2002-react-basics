@@ -19,7 +19,8 @@ import {
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../configs/api";
 import { jobs } from "../fake-api/jobs";
-import { useSearchParams } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const UsersPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -152,6 +153,12 @@ const UsersPage = () => {
       gender: gender ? gender : undefined,
     });
   }, [currentPage, searchValue, genderSearchValue, jobSearchValue]);
+
+  const userSelector = useSelector((state) => state.auth);
+
+  if (userSelector.role !== "admin") {
+    return <Navigate to="/" />;
+  }
 
   return (
     <Box paddingBottom="24">

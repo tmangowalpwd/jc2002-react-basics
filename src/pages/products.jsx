@@ -109,13 +109,15 @@ const ProductPage = () => {
     let product_name = searchParams.get("search");
     let _page = searchParams.get("page");
 
-    fetchProducts({
-      params: {
-        _limit: pageLimit,
-        _page: _page,
-        product_name: product_name ? product_name : undefined,
-      },
-    });
+    setTimeout(() => {
+      fetchProducts({
+        params: {
+          _limit: pageLimit,
+          _page: _page,
+          product_name: product_name ? product_name : undefined,
+        },
+      });
+    }, 2000);
   }, [currentPage, searchInput]);
 
   return (

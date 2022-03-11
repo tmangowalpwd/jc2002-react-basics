@@ -802,7 +802,7 @@
       "password": "password123",
       "email": "seto@mail.com",
       "full_name": "Seto Otes",
-      "role": "user"
+      "role": "admin"
     }
   ]
 }

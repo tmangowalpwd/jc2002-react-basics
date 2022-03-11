@@ -1,8 +1,20 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { Box, Button } from "@chakra-ui/react";
+import user_types from "../../redux/reducers/types/user";
 
 const Navbar = () => {
   const userSelector = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+
+  const logoutBtnHandler = () => {
+    dispatch({
+      type: user_types.LOGOUT_USER,
+    });
+
+    localStorage.removeItem("user_data");
+  };
 
   return (
     <nav>
@@ -13,11 +25,14 @@ const Navbar = () => {
         <Link to="/band">Band</Link>
         <Link to="/tour">Tour</Link>
         <Link to="/products">Products</Link>
+        <Link to="/users">Users</Link>
         <a href="contact.html">Contact</a>
       </div>
-      <div className="search-wrapper">
-        <i className="bi bi-search" />
-      </div>
+      {userSelector.role}
+      {/* <i className="bi bi-search" /> */}
+      <Button onClick={logoutBtnHandler} colorScheme="red">
+        Logout
+      </Button>
     </nav>
   );
 };

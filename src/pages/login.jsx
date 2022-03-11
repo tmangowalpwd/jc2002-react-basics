@@ -3,6 +3,7 @@ import { axiosInstance } from "../configs/api";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import user_types from "../redux/reducers/types/user";
+import { Navigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [usernameInput, setUsernameInput] = useState("");
@@ -43,6 +44,10 @@ const LoginPage = () => {
         console.log(err);
       });
   };
+
+  if (userSelector.id) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <Center>
