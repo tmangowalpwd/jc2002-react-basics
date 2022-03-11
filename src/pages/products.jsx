@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../configs/api";
 import { useSearchParams } from "react-router-dom";
+import ProtectedPage from "../components/ProtectedPage";
 
 const ProductCard = ({ productName, price, category }) => {
   return (

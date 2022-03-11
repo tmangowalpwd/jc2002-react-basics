@@ -1,3 +1,5 @@
+import ProtectedPage from "../components/ProtectedPage";
+
 const HomePage = () => {
   return (
     <div>

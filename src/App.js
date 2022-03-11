@@ -15,6 +15,7 @@ import UsersPage from "./pages/users";
 import LoginPage from "./pages/login";
 import CounterPage from "./pages/counter";
 import user_types from "./redux/reducers/types/user"
+import ProtectedPage from "./components/ProtectedPage"
 
 function App() {
   const [isAuthChecked, setIsAuthChecked] = useState(false);
@@ -50,9 +51,17 @@ function App() {
         <Route path="/todo" element={<TodoPage />} />
         <Route path="/tour" element={<TourPage />} />
         <Route path="/band-member/:bandMemberId" element={<HalamanBandMember />} />
-        <Route path="/products" element={<ProductPage />} />
+        <Route path="/products" element={
+          <ProtectedPage needsLogin>
+            <ProductPage />
+          </ProtectedPage>
+        } />
         <Route path="/users" element={<UsersPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={
+          <ProtectedPage guestsOnly>
+            <LoginPage />
+          </ProtectedPage>
+        } />
         <Route path="/counter" element={<CounterPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
