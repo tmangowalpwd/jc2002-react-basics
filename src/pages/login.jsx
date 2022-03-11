@@ -1,16 +1,16 @@
 import { Box, Button, Center, FormLabel, Input, Text } from "@chakra-ui/react";
 import { axiosInstance } from "../configs/api";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import user_types from "../redux/reducers/types/user";
 
 const LoginPage = () => {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
-  const [userData, setUserData] = useState({});
-
   const userSelector = useSelector((state) => state.auth);
-  const todoSelector = useSelector((state) => state.todo);
+
+  const dispatch = useDispatch();
 
   const inputHandler = (event, field) => {
     const { value } = event.target;
@@ -30,7 +30,14 @@ const LoginPage = () => {
         },
       })
       .then((res) => {
-        setUserData(res.data[0]);
+        const userData = res.data[0];
+
+        dispatch({
+          type: user_types.LOGIN_USER,
+          payload: userData,
+        });
+
+        localStorage.setItem("user_data", JSON.stringify(userData));
       })
       .catch((err) => {
         console.log(err);

@@ -25,10 +25,13 @@ const UsersPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [usersList, setUsersList] = useState([]);
+
+  // Untuk page
   const [currentPage, setCurrentPage] = useState(
     searchParams.get("page") ? parseInt(searchParams.get("page")) : 1
   );
 
+  // State yg simpan inputan
   const [inputSearch, setInputSearch] = useState("");
   const [selectedGender, setSelectedGender] = useState(
     searchParams.get("gender") ? searchParams.get("gender") : ""
@@ -37,6 +40,7 @@ const UsersPage = () => {
     searchParams.get("job") ? searchParams.get("job") : ""
   );
 
+  // State yg simpan value yang sedang di-search
   const [genderSearchValue, setGenderSearchValue] = useState(
     searchParams.get("gender") ? searchParams.get("gender") : ""
   );
@@ -132,6 +136,8 @@ const UsersPage = () => {
     setSearchParams(newSearchParams);
     setCurrentPage(newPage);
   };
+
+  const inputHandler = (event) => {};
 
   useEffect(() => {
     const first_name = searchParams.get("search");
