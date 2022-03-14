@@ -3,21 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import TodoPage from './pages/todo';
-import BandPage from "./pages/band";
-import Navbar from "./components/Navbar/Navbar";
-import TourPage from "./pages/tour";
-import HomePage from "./pages/home";
-import NotFoundPage from "./pages/404";
-import HalamanBandMember from "./pages/band-member";
-import ProductPage from "./pages/products";
-import UsersPage from "./pages/users";
-import LoginPage from "./pages/login";
-import CounterPage from "./pages/counter";
 import user_types from "./redux/reducers/types/user"
-import ProtectedPage from "./components/ProtectedPage"
-import ProfilePage from "./pages/profile"
-import MyProfilePage from "./pages/my-profile"
+import { routes } from "./routes"
 
 function App() {
   const [isAuthChecked, setIsAuthChecked] = useState(false);
@@ -46,9 +33,25 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
+      {/* Render navbar */}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        {
+          routes.map((route) => {
+            if (route.navbar) {
+              return <Route path={route.path} element={route.navbar} />
+            }
+          })
+        }
+      </Routes>
+
+      {/* Render pages */}
+      <Routes>
+        {
+          routes.map((route) => {
+            return <Route path={route.path} element={route.component} />
+          })
+        }
+        {/* <Route path="/" element={<HomePage />} />
         <Route path="/band" element={<BandPage />} />
         <Route path="/todo" element={<TodoPage />} />
         <Route path="/tour" element={<TourPage />} />
@@ -67,7 +70,7 @@ function App() {
         <Route path="/counter" element={<CounterPage />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
         <Route path="/my-profile" element={<MyProfilePage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFoundPage />} /> */}
       </Routes>
     </BrowserRouter>
   );

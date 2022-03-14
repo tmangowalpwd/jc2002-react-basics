@@ -88,6 +88,8 @@ const UsersPage = () => {
     setGenderSearchValue(selectedGender);
     setJobSearchValue(selectedJob);
 
+    setInputSearch("");
+
     setCurrentPage(1);
 
     let newSearchParams = { page: 1 };
@@ -170,6 +172,7 @@ const UsersPage = () => {
               <Input
                 id="searchName"
                 onChange={(event) => setInputSearch(event.target.value)}
+                value={inputSearch}
               />
               <Button onClick={searchBtnHandler} marginLeft="8">
                 Search
