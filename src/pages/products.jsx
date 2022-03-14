@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { axiosInstance } from "../configs/api";
 import { useSearchParams } from "react-router-dom";
 import ProtectedPage from "../components/ProtectedPage";
+import { Helmet } from "react-helmet";
 
 const ProductCard = ({ productName, price, category }) => {
   return (
@@ -123,6 +124,9 @@ const ProductPage = () => {
 
   return (
     <Center>
+      <Helmet>
+        <title>Product Page</title>
+      </Helmet>
       <Box width="xl">
         <Text fontSize="2xl" marginBottom="8">
           Products Page
